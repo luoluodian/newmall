@@ -1,7 +1,8 @@
 <!-- 推荐组件 -->
 <template>
   <div class="recommendview" >
-    <div class="recommend-item" v-for="item in recommends">
+     <!--eslint-disable-next-line-->
+    <div class="recommend-item" v-for="item in recommends" >
       <a :href="item.link">
         <img :src="item.image" alt="">
         <div>{{item.title}}</div>
