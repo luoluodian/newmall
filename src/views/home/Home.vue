@@ -11,7 +11,6 @@
     :class="{fixed: isTabfixed}" 
     v-show="isTabfixed"/>
 
-
    <scroll class="content" ref="scroll"
            @scroll="contentScroll"
            :probe-type="3"
@@ -39,11 +38,8 @@ import Scroll from 'components/common/scroll/scroll.vue'
 import BackTop from 'components/content/backtop/BackTop.vue'
 import {itemLisenerMixin } from 'common/mixin'
 
-
 import { getHomeMuldata,
          getHomeData } from 'network/home.js'
-
-
 
   export default {
     name: "Home",
@@ -72,17 +68,16 @@ import { getHomeMuldata,
         tabOffsetTop: 0,
         isTabfixed: false,
         saveY: 0,
-       
       }
     },
     created() {
+
       this.getMuldata()
 
       this.getData('pop')
       this.getData('new')
       this.getData('sell')
 
-     
     },
     mounted() {
       this.itemListener = () => {
@@ -92,12 +87,13 @@ import { getHomeMuldata,
       this.$bus.$on('loadImg', this.itemListener )
     },
     activated() {
-      this.$refs.scroll.scrollTo(0,this.saveY,0)
+      console.log(this.saveY);
+      this.$refs.scroll.scrollTo(0,this.saveY,500);
       this.$refs.scroll.refresh()
     },
     deactivated() {
       this.saveY = this.$refs.scroll.getSaveY()
-     // console.log(this.saveY);
+      console.log(this.saveY);
      //告诉取消那个函数
      //console.log(this.itemListener);
      this.$bus.$off('loadImg', this.itemListener)
@@ -122,7 +118,6 @@ import { getHomeMuldata,
         }
       },
 
-
       backClick() {
         console.log(this.$refs.scroll.scroll);
         this.$refs.scroll.scrollTo(0,0,500);
@@ -132,7 +127,6 @@ import { getHomeMuldata,
       contentScroll(position) {
         // console.log(position);
         this.showTabControl = (-position.y) > 1000
-        
         this.isTabfixed = (-position.y) > this.tabOffsetTop
       },
 
@@ -171,6 +165,7 @@ import { getHomeMuldata,
           this.recommends = res.data.recommend.list
         })
       },
+
       //展示数据
       getData(type) {
         const page = this.goods[type].page + 1
