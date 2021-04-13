@@ -2,7 +2,7 @@
 <template>
   <div id="detail">
     <!-- 导航栏 -->
-   <detail-tabbar class="tab-bar"/>
+   <detail-tabbar class="tab-bar" />
    <scroll class="content"
            ref="scroll"
            :probe-type="3">
